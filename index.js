@@ -1,13 +1,41 @@
-const container = document.getElementById("container");
+let color = "black";
 
-function makeRows(rows, cols) {
-    container.style.setProperty('--grid-rows', rows);
-    container.style.setProperty('--grid-cols', cols);
-    for (c = 0; c < (rows * cols); c++) {
-        let cell = document.createElement("div");
-        
-        container.appendChild(cell).className = "grid-item"
-    };
-};
 
-makeRows(16, 16);
+function populateBoard(size){
+    let board = document.querySelector(".board");
+    let squares = board.querySelectorAll('div');
+    
+// removes previous squares
+
+    squares.forEach((div) => {
+        return div.remove();
+    });
+
+
+    board.style.gridTemplateColumns = `repeat(${size} , 1fr)`;
+    board.style.gridTemplateRows = `repeat(${size} , 1fr)`;
+
+let amount = size * size;
+
+for(let i = 0; i < amount; i++) {
+    let square = document.createElement('div');
+    square.addEventListener('mouseover', colorSquare);
+    square.style.backgroundColor = 'white'
+    board.insertAdjacentElement('beforeend', square);
+    }
+}
+
+populateBoard(16);
+
+function changeSize(input) {
+    if(input >= 2 && input <= 100){
+    populateBoard(input);
+}
+else {
+    console.log("too many squares");
+    }
+}
+
+function colorSquare() {
+    this.style.backgroundColor = color;
+}

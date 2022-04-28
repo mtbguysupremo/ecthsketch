@@ -9,7 +9,8 @@
 </head>
 <body>
     <div id="container">
-        <div class="title">EtchSketch!</div>
+        <div class="title"><h1>EtchSketch!</h1></div>
+        <div class="mode">Status: coloring</div>
         <div class="content">
             <div class="board"></div>
             <div class="buttons">
@@ -26,6 +27,9 @@
         onchange="changeSize(this.value)" 
         />
         <button>Set Size</button>
+    </div>
+    <div class="error">
+        Input must be between 2 and 100.
     </div>
     <script type="text/javascript" src="index.js" src="reset.css"></script>
 </body>

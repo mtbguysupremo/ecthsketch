@@ -1,5 +1,5 @@
 let color = "black";
-
+let click = true;
 
 function populateBoard(size){
     let board = document.querySelector(".board");
@@ -29,18 +29,21 @@ populateBoard(16);
 
 function changeSize(input) {
     if(input >= 2 && input <= 100){
+        document.querySelector('.error').style.display = "none";
     populateBoard(input);
 }
 else {
-    console.log("too many squares");
+    document.querySelector('.error').style.display = "flex";
     }
 }
 
 function colorSquare() {
+    if(click) {
     if(color === 'random'){
         this.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
     }else {
         this.style.backgroundColor = color;
+        }
     }
 }
 
@@ -53,3 +56,15 @@ function resetBoard() {
     let squares = board.querySelectorAll("div");
     squares.forEach((div) => div.style.backgroundColor = 'white');
 }
+
+document.querySelector('body').addEventListener('click', (e) => {
+    if(e.target.tagName != 'BUTTON') {
+         // set the event listener to look for click function to draw.
+    click = !click;
+    if(click) {
+        document.querySelector('.mode').textContent = "Status: Coloring"
+    } else {
+        document.querySelector('.mode').textContent = "Status: Spectator"
+    }
+    }
+});
